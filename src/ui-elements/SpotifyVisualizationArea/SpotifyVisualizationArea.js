@@ -1,25 +1,36 @@
 import React from 'react'
 import './SpotifyVisualizationArea.css'
 import ControlActionsContainer from './ControlActions/container'
-import { ScatterChart, XAxis, YAxis, ZAxis, Tooltip, Scatter, Legend } from 'recharts'
+import VizBar from './Charts/VizBar'
+import VizScatter from './Charts/VizScatter'
 
-const SpotifyVisualizationArea = ({ xAxis, yAxis, tracks }) => (
-    <div>
-        {
-            tracks !== undefined ?
-                <div>
-                    <ControlActionsContainer/>
-                    <ScatterChart width={500} height={300} className="Center-Block">
-                        <XAxis dataKey={xAxis} type="number"/>
-                        <YAxis dataKey={yAxis} type="number"/>
-                        <ZAxis dataKey="name" type="category"/>
-                        <Tooltip isAnimationActive={false}/>
-                        <Scatter data={tracks}/>
-                    </ScatterChart>
-                </div> :
-            null
+class SpotifyVisualizationArea extends React.Component {
+    render() {
+        const {
+            visualizationType,
+            feature,
+            xAxis,
+            yAxis,
+            data
+            } = this.props;
+        let chart;
+        if (visualizationType === 'bar') {
+            chart = <VizBar data={data} feature={feature} />
+        } else {
+            chart = <VizScatter data={data} xAxis={xAxis} yAxis={yAxis} />
         }
-    </div>
-);
+        return (
+            <div>
+                {
+                    data !== undefined ?
+                        <div>
+                            <ControlActionsContainer />
+                            {chart}
+                        </div> :
+                        null
+                }
+            </div>);
+    }
+}
 
 export default SpotifyVisualizationArea;

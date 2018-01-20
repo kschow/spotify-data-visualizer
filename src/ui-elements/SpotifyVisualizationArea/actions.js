@@ -3,6 +3,38 @@ import fetch from 'cross-fetch'
 import { hideShown } from '../SearchResults/actions'
 export const REQUEST_SPOTIFY_SONG_INFO = 'REQUEST_SPOTIFY_SONG_INFO';
 export const RECEIVE_SPOTIFY_SONG_INFO = 'RECEIVE_SPOTIFY_SONG_INFO';
+export const CHANGE_VISUALIZATION_TYPE = 'CHANGE_VISUALIZATION_TYPE';
+export const ON_FEATURE_CHANGE =  'ON_FEATURE_CHANGE';
+export const ON_SELECT_CHANGE_X = 'ON_SELECT_CHANGE_X';
+export const ON_SELECT_CHANGE_Y = 'ON_SELECT_CHANGE_Y';
+
+export function changeVisualizationType(selected) {
+    return {
+        type: CHANGE_VISUALIZATION_TYPE,
+        selected
+    }
+}
+
+export function onFeatureChange(selected) {
+    return {
+        type: ON_FEATURE_CHANGE,
+        selected
+    }
+}
+
+export function onSelectChangeX(selected) {
+    return {
+        type: ON_SELECT_CHANGE_X,
+        selected
+    }
+}
+
+export function onSelectChangeY(selected) {
+    return {
+        type: ON_SELECT_CHANGE_Y,
+        selected
+    }
+}
 
 function requestSpotifySongInfo(spotifyId) {
     return {

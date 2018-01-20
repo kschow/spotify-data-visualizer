@@ -1,59 +1,74 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { AUDIO_FEATURES } from '../util'
 
-const ControlActions = ({ xAxis, yAxis, onChangeX, onChangeY }) => (
+const ControlActions = ({ visualizationType, feature, xAxis, yAxis,
+    onVisualizationChange, onFeatureChange, onChangeX, onChangeY }) => (
     <div>
         <label>
-            X axis
-            <select name="x"
-                    value={xAxis}
-                    onChange={(e) => onChangeX(e.target.value)}>
-                <option value="loudness">loudness</option>
-                <option value="energy">energy</option>
-                <option value="key">key</option>
-                <option value="mode">mode</option>
-                <option value="acousticness">acousticness</option>
-                <option value="speechiness">speechiness</option>
-                <option value="instrumentalness">instrumentalness</option>
-                <option value="liveness">liveness</option>
-                <option value="valence">valence</option>
-                <option value="tempo">tempo</option>
-                <option value="danceability">danceability</option>
-                <option value="trackNumber">track number</option>
-                <option value="durationMs">duration (ms)</option>
-                <option value="timeSignature">time signature</option>
-                <option value="popularity">popularity</option>
+            Visualization Type
+            <select name="visualizationType"
+                    value={visualizationType}
+                    onChange={(e) => onVisualizationChange(e.target.value)}>
+                <option value="scatter">Scatter Plot</option>
+                <option value="bar">Bar Chart</option>
             </select>
         </label>
 
-        <label>
-            Y axis
-            <select name="y"
-                    value={yAxis}
-                    onChange={(e) => onChangeY(e.target.value)}>
-                <option value="loudness">loudness</option>
-                <option value="energy">energy</option>
-                <option value="key">key</option>
-                <option value="mode">mode</option>
-                <option value="acousticness">acousticness</option>
-                <option value="speechiness">speechiness</option>
-                <option value="instrumentalness">instrumentalness</option>
-                <option value="liveness">liveness</option>
-                <option value="valence">valence</option>
-                <option value="tempo">tempo</option>
-                <option value="danceability">danceability</option>
-                <option value="trackNumber">track number</option>
-                <option value="durationMs">duration (ms)</option>
-                <option value="timeSignature">time signature</option>
-                <option value="popularity">popularity</option>
-            </select>
-        </label>
+        { visualizationType === 'bar' ?
+            <div>
+                <label>
+                    Feature
+                    <select name="feature"
+                            value={feature}
+                            onChange={(e) => onFeatureChange(e.target.value)}>
+                        {
+                            Object.keys(AUDIO_FEATURES).map((key) => {
+                                return <option key={key} value={key}>{AUDIO_FEATURES[key].displayName}</option>
+                            })
+                        }
+                    </select>
+                </label>
+            </div> : null
+        }
+        { visualizationType === 'scatter' ?
+            <div>
+                <label>
+                    X axis
+                    <select name="x"
+                            value={xAxis}
+                            onChange={(e) => onChangeX(e.target.value)}>
+                        {
+                            Object.keys(AUDIO_FEATURES).map((key) => {
+                                return <option key={key} value={key}>{AUDIO_FEATURES[key].displayName}</option>
+                            })
+                        }
+                    </select>
+                </label>
+
+                <label>
+                    Y axis
+                    <select name="y"
+                            value={yAxis}
+                            onChange={(e) => onChangeY(e.target.value)}>
+                        {
+                            Object.keys(AUDIO_FEATURES).map((key) => {
+                                return <option key={key} value={key}>{AUDIO_FEATURES[key].displayName}</option>
+                            })
+                        }
+                    </select>
+                </label>
+            </div> : null }
     </div>
 );
 
 ControlActions.propTypes = {
-    x: PropTypes.string,
-    y: PropTypes.string,
+    visualizationType: PropTypes.string.isRequired,
+    feature: PropTypes.string.isRequired,
+    xAxis: PropTypes.string.isRequired,
+    yAxis: PropTypes.string.isRequired,
+    onVisualizationChange: PropTypes.func.isRequired,
+    onFeatureChange: PropTypes.func.isRequired,
     onChangeX: PropTypes.func.isRequired,
     onChangeY: PropTypes.func.isRequired
 };

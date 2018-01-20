@@ -21,7 +21,7 @@ const SearchResults = ({ shown, results, rowClick, displayClick }) => (
 );
 
 SearchResults.propTypes = {
-    shown: PropTypes.bool.isRequired,
+    shown: PropTypes.bool,
     results: PropTypes.array.isRequired,
     rowClick: PropTypes.func.isRequired,
     displayClick: PropTypes.func.isRequired

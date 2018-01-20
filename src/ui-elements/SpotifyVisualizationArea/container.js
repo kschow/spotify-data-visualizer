@@ -2,18 +2,18 @@ import { connect } from 'react-redux'
 import SpotifyVisualizationArea from './SpotifyVisualizationArea'
 
 const mapStateToProps = (state) => {
+    let stateSlice = state.spotifyVisualizationArea;
     return {
-        xAxis: state.controlActions.xAxis,
-        yAxis: state.controlActions.yAxis,
-        tracks: state.spotifyVisualizationArea.results.tracks
+        visualizationType: stateSlice.visualizationType,
+        feature: stateSlice.feature,
+        xAxis: stateSlice.xAxis,
+        yAxis: stateSlice.yAxis,
+        data: stateSlice.data
     }
 };
-//
+
 //const mapDispatchToProps = (dispatch) => {
 //    return {
-//        onClick: (id) => {
-//            dispatch(getSongInfo(id));
-//        }
 //    }
 //};
 
