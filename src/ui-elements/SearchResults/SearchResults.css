@@ -29,3 +29,12 @@ div.Submit {
     line-height: 5em;
     vertical-align: bottom;
 }
+
+button.Button-Link {
+    color: blue;
+    border: none;
+    padding: 0!important;
+    font: inherit;
+    border-bottom: 1px solid blue;
+    cursor: pointer;
+}

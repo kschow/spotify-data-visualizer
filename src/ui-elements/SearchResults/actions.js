@@ -16,7 +16,7 @@ export function receiveSearchSpotifyApi(searchText, json) {
     return {
         type: RECEIVE_SEARCH_SPOTIFY_API,
         searchText,
-        results: JSON.parse(json),
+        results: json === null ? [] : JSON.parse(json),
         receivedAt: Date.now()
     }
 }
@@ -37,10 +37,16 @@ export function searchSpotifyApi(searchText) {
     return (dispatch) => {
         dispatch(requestSearchSpotifyApi(searchText));
         return fetch(`http://localhost:8080/search/artist?search=${searchText}`)
-            .then(
-                response => response._bodyText,
-                error => console.log('An error occurred. ', error)
-            )
+            .then(function(response) {
+                if (response.status === 200) {
+                    return response._bodyText;
+                } else {
+                    let error = new Error(response.statusText);
+                    error.response = response;
+                    console.log(error);
+                    return null;
+                }
+            })
             .then(json => dispatch(receiveSearchSpotifyApi(searchText, json)))
     }
 }

@@ -3,26 +3,52 @@ import PropTypes from 'prop-types'
 import SearchResult from './SearchResult';
 import './SearchResults.css'
 
-const SearchResults = ({ shown, results, rowClick, displayClick }) => (
-    <div>
-        <div>
-            <a href="#" onClick={displayClick}>{shown ? 'Hide Results' : 'Show Results'}</a>
-        </div>
-        {
-            shown && <div>{
-                results.map((result, index) => {
-                    return <SearchResult key={index}
-                                         onClick={() => rowClick(index)}
-                                         {...result} />
-                })
-            }</div>
+class SearchResults extends React.Component {
+
+    resultRows() {
+        const {
+            results,
+            rowClick
+            } = this.props;
+        return <div>{
+            results.map((result, index) => {
+                return <SearchResult key={index}
+                                     onClick={() => rowClick(index)}
+                                     {...result} />
+            })
         }
-    </div>
-);
+        </div>;
+    }
+    render() {
+        const {
+            shown,
+            results,
+            displayClick
+            } = this.props;
+        return (
+            <div>
+                {
+                    results.length !== 0 ?
+                        <div>
+                            <div>
+                                <button className="Button-Link" onClick={displayClick}>{shown ? 'Hide Results' : 'Show Results'}</button>
+                            </div>
+                            { shown && this.resultRows() }
+                            { shown && <div>
+                                <button className="Button-Link" onClick={displayClick}>{shown ? 'Hide Results' : 'Show Results'}</button>
+                            </div>}
+                        </div> :
+                        <div>
+                            No results found, please try again with a different search
+                        </div>
+                }
+            </div>);
+    }
+}
 
 SearchResults.propTypes = {
     shown: PropTypes.bool,
-    results: PropTypes.array.isRequired,
+    results: PropTypes.array,
     rowClick: PropTypes.func.isRequired,
     displayClick: PropTypes.func.isRequired
 };
