@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import SpotifyVisualizationArea from './SpotifyVisualizationArea'
 
 const mapStateToProps = (state) => {
-    let stateSlice = state.spotifyVisualizationArea;
+    let stateSlice = state.TrackInfo;
     return {
         visualizationType: stateSlice.visualizationType,
         feature: stateSlice.feature,

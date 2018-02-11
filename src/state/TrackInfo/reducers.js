@@ -39,7 +39,7 @@ function transformTracks(data, visualizationType, feature) {
     }
 }
 
-export function spotifyVisualizationArea(state = initialState, action) {
+export function TrackInfo(state = initialState, action) {
     switch(action.type) {
         case CHANGE_VISUALIZATION_TYPE: {
             let data = transformTracks(state, action.selected, state.feature);

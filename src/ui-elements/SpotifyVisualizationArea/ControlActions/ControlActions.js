@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { AUDIO_FEATURES } from '../util'
+import { AUDIO_FEATURES } from '../../../state/TrackInfo/util'
 
 const ControlActions = ({ visualizationType, feature, xAxis, yAxis,
     onVisualizationChange, onFeatureChange, onChangeX, onChangeY }) => (

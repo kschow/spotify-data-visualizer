@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import ControlActions from './ControlActions'
-import { changeVisualizationType, onFeatureChange, onSelectChangeX, onSelectChangeY } from '../actions'
+import { changeVisualizationType, onFeatureChange, onSelectChangeX, onSelectChangeY } from '../../../state/TrackInfo/actions'
 
 const mapStateToProps = (state) => {
     return {
-        visualizationType: state.spotifyVisualizationArea.visualizationType,
-        feature: state.spotifyVisualizationArea.feature,
-        xAxis: state.spotifyVisualizationArea.xAxis,
-        yAxis: state.spotifyVisualizationArea.yAxis
+        visualizationType: state.TrackInfo.visualizationType,
+        feature: state.TrackInfo.feature,
+        xAxis: state.TrackInfo.xAxis,
+        yAxis: state.TrackInfo.yAxis
     }
 };
 

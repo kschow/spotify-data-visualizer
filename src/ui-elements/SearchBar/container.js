@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import SearchBar from './SearchBar'
-import { searchSpotifyApi } from '../SearchResults/actions'
+import { searchSpotifyApi } from '../../state/SearchResults/actions'
 
 const mapDispatchToProps = (dispatch) => {
     return {

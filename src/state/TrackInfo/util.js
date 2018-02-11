@@ -285,7 +285,7 @@ function tempoMapFunction(data) {
     return Math.floor(data.tempo / 10);
 }
 
-// buckets for duration go in one minute intervals up to 6, everything 6 minutes+ is in the same bucket
+// buckets for duration go in one minute intervals up to 6, everything 7 minutes+ is in the same bucket
 function durationMapFunction(data) {
     if (isNil(data.durationMs)) {
         return NOT_AVAILABLE;

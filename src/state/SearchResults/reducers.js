@@ -9,7 +9,7 @@ const initialState = {
     results: []
 };
 
-export function searchResults(state = initialState, action) {
+export function SearchResults(state = initialState, action) {
     switch(action.type) {
         case REQUEST_SEARCH_SPOTIFY_API:
             return {

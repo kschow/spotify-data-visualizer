@@ -1,6 +1,5 @@
 import fetch from 'cross-fetch'
 
-import { hideShown } from '../SearchResults/actions'
 export const REQUEST_SPOTIFY_SONG_INFO = 'REQUEST_SPOTIFY_SONG_INFO';
 export const RECEIVE_SPOTIFY_SONG_INFO = 'RECEIVE_SPOTIFY_SONG_INFO';
 export const CHANGE_VISUALIZATION_TYPE = 'CHANGE_VISUALIZATION_TYPE';
@@ -62,6 +61,5 @@ export function getSongInfo(resultIndex) {
                 error => console.log('An error occurred. ', error)
             )
             .then(json => dispatch(receiveSpotifySongInfo(spotifyId, json)))
-            .then(() => dispatch(hideShown()))
     }
 }

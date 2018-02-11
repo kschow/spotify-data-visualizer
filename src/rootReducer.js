@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { searchResults } from './ui-elements/SearchResults/reducers'
-import { spotifyVisualizationArea } from './ui-elements/SpotifyVisualizationArea/reducers'
+import { SearchResults } from './state/SearchResults/reducers'
+import { TrackInfo } from './state/TrackInfo/reducers'
 
 export const rootReducer = combineReducers({
-    searchResults,
-    spotifyVisualizationArea
+    SearchResults,
+    TrackInfo
 });
