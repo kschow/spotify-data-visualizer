@@ -8,7 +8,7 @@ const SearchResult = ({ name, popularity, imageUrls, onClick }) => {
             </div>
             <div className="Block Info">
                 <div>Name: {name}</div>
-                <div>Popularity: {popularity}</div>
+                {popularity !== undefined ? <div>Popularity: {popularity}</div> : null}
             </div>
             <div className="Block Submit"><button onClick={onClick}>Select</button></div>
         </div>

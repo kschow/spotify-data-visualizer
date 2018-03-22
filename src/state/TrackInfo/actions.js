@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch'
+import { startCase } from 'lodash/string'
 
 export const REQUEST_SPOTIFY_SONG_INFO = 'REQUEST_SPOTIFY_SONG_INFO';
 export const RECEIVE_SPOTIFY_SONG_INFO = 'RECEIVE_SPOTIFY_SONG_INFO';
@@ -53,9 +54,16 @@ export function receiveSpotifySongInfo(spotifyId, json) {
 
 export function getSongInfo(resultIndex) {
     return (dispatch, getState) => {
-        const spotifyId = getState().searchResults.results[resultIndex].spotifyId;
+        const playlistString = 'Playlist';
+        const searchType = startCase(getState().SearchResults.searchType);
+        const spotifyId = getState().SearchResults.results[resultIndex].spotifyId;
+        const userId = searchType === playlistString ? getState().SearchResults.results[resultIndex].userId : null;
+
+        const fetchUrlBase = `http://localhost:8080/get${searchType}Tracks/`;
+        const pathVars = searchType === playlistString ? `${userId}/${spotifyId}` : `${spotifyId}`;
+
         dispatch(requestSpotifySongInfo(spotifyId));
-        return fetch(`http://localhost:8080/getArtistInfo/${spotifyId}`)
+        return fetch(fetchUrlBase + pathVars)
             .then(
                 response => response._bodyText,
                 error => console.log('An error occurred. ', error)

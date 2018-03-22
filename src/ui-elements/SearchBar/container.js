@@ -6,7 +6,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onSubmit: (e) => {
             e.preventDefault();
-            dispatch(searchSpotifyApi(e.target.searchText.value));
+            const searchText = e.target.searchText.value;
+            const searchType = e.target.searchType.value;
+            dispatch(searchSpotifyApi(searchText, searchType));
         }
     }
 };

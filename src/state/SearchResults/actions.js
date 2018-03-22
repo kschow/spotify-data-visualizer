@@ -2,22 +2,30 @@ import fetch from 'cross-fetch'
 
 export const REQUEST_SEARCH_SPOTIFY_API = 'REQUEST_SEARCH_SPOTIFY_API';
 export const RECEIVE_SEARCH_SPOTIFY_API = 'RECEIVE_SEARCH_SPOTIFY_API';
+export const CHANGE_SEARCH_TYPE = 'CHANGE_SEARCH_TYPE';
 export const TOGGLE_SHOWN = 'TOGGLE_SHOWN';
 export const HIDE_SHOWN = 'HIDE_SHOWN';
 
-function requestSearchSpotifyApi(searchText) {
+function requestSearchSpotifyApi(searchText, searchType) {
     return {
         type: REQUEST_SEARCH_SPOTIFY_API,
-        searchText
+        searchText,
+        searchType
     }
 }
 
-export function receiveSearchSpotifyApi(searchText, json) {
+export function receiveSearchSpotifyApi(json) {
     return {
         type: RECEIVE_SEARCH_SPOTIFY_API,
-        searchText,
         results: json === null ? [] : JSON.parse(json),
         receivedAt: Date.now()
+    }
+}
+
+function changeSearchType(searchType) {
+    return {
+        type: CHANGE_SEARCH_TYPE,
+        searchType
     }
 }
 
@@ -33,10 +41,11 @@ export function hideShown() {
     }
 }
 
-export function searchSpotifyApi(searchText) {
+export function searchSpotifyApi(searchText, searchType) {
     return (dispatch) => {
         dispatch(requestSearchSpotifyApi(searchText));
-        return fetch(`http://localhost:8080/search/artist?search=${searchText}`)
+        dispatch(changeSearchType(searchType));
+        return fetch(`http://localhost:8080/search/${searchType}?search=${searchText}`)
             .then(function(response) {
                 if (response.status === 200) {
                     return response._bodyText;
@@ -47,6 +56,6 @@ export function searchSpotifyApi(searchText) {
                     return null;
                 }
             })
-            .then(json => dispatch(receiveSearchSpotifyApi(searchText, json)))
+            .then(json => dispatch(receiveSearchSpotifyApi(json)))
     }
 }
