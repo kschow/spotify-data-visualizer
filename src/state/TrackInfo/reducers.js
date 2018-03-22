@@ -18,14 +18,14 @@ const initialState = {
 };
 
 function transformTracksBox(data, feature) {
-    let buckets = Object.values(data.results.tracks).map(AUDIO_FEATURES[feature].mapFunction)
+    let buckets = Object.values(data.results).map(AUDIO_FEATURES[feature].mapFunction)
         .reduce(AUDIO_FEATURES[feature].reduceFunction,
             cloneDeep(AUDIO_FEATURES[feature].buckets));
     return Object.values(buckets);
 }
 
 function transformTracksScatter(data) {
-    return Object.values(data.results.tracks);
+    return Object.values(data.results);
 }
 
 function transformTracks(data, visualizationType, feature) {

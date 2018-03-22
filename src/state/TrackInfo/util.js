@@ -269,7 +269,7 @@ function loudnessMapFunction(data) {
     if (loudness < 0) {
         return 7;
     }
-    if (loudness === 0) {
+    if (loudness >= 0) {
         return 8;
     }
     return NOT_AVAILABLE;
