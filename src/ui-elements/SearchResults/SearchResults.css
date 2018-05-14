@@ -37,4 +37,5 @@ button.Button-Link {
     font: inherit;
     border-bottom: 1px solid blue;
     cursor: pointer;
+    margin: .75em;
 }

@@ -4,6 +4,7 @@ import SpotifyVisualizationArea from './SpotifyVisualizationArea'
 const mapStateToProps = (state) => {
     let stateSlice = state.TrackInfo;
     return {
+        isLoading: stateSlice.isFetching,
         visualizationType: stateSlice.visualizationType,
         feature: stateSlice.feature,
         xAxis: stateSlice.xAxis,
