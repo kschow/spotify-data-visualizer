@@ -45,7 +45,7 @@ export function searchSpotifyApi(searchText, searchType) {
     return (dispatch) => {
         dispatch(requestSearchSpotifyApi(searchText));
         dispatch(changeSearchType(searchType));
-        return fetch(`http://localhost:8080/search/${searchType}?search=${searchText}`)
+        return fetch(`${process.env.REACT_APP_ROOT_API_URL}/search/${searchType}?search=${searchText}`)
             .then(function(response) {
                 if (response.status === 200) {
                     return response._bodyText;
