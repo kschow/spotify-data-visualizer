@@ -59,7 +59,7 @@ export function getSongInfo(resultIndex) {
         const spotifyId = getState().SearchResults.results[resultIndex].spotifyId;
         const userId = searchType === playlistString ? getState().SearchResults.results[resultIndex].userId : null;
 
-        const fetchUrlBase = `http://localhost:8080/get${searchType}Tracks/`;
+        const fetchUrlBase = `${process.env.REACT_APP_ROOT_API_URL}/get${searchType}Tracks/`;
         const pathVars = searchType === playlistString ? `${userId}/${spotifyId}` : `${spotifyId}`;
 
         dispatch(requestSpotifySongInfo(spotifyId));
