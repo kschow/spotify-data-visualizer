@@ -12,16 +12,8 @@ import { rootReducer } from './rootReducer'
 
 const loggerMiddleware = createLogger();
 
-const initialState = {
-    searchResults: {
-        isFetching: false,
-        results: []
-    }
-};
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer,
-    initialState,
     composeEnhancers(applyMiddleware(thunk, loggerMiddleware)));
 
 ReactDOM.render(
